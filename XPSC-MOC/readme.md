@@ -1,0 +1,1 @@
+this is moc contest for xpsc.
