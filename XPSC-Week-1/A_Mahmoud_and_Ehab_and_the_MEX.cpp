@@ -19,7 +19,7 @@ int main()
     {
         for (int i = 0; i <= x; i++)
         {
-            bool f = true;
+            bool f = false;
             for (int val : v)
             {
                 if (x == val)
@@ -29,11 +29,11 @@ int main()
                 }
                 if (i == val && i != x)
                 {
-                    f = false;
+                    f = true;
                     break;
                 }
             }
-            if (f)
+            if (!f)
                 cnt++;
         }
         cout << cnt - 1 << endl;
