@@ -13,30 +13,23 @@ int main()
         cin >> v[i];
     }
     int cnt = 0;
-    if (n == 1 && x == 0 && v[0] == 0)
-        cout << 1 << endl;
-    else
+    for (int i = 0; i < x; i++)
     {
-        for (int i = 0; i <= x; i++)
+        bool f = false;
+        for (int val : v)
         {
-            bool f = false;
-            for (int val : v)
+            if (i == val)
             {
-                if (x == val)
-                {
-                    cnt++;
-                    break;
-                }
-                if (i == val && i != x)
-                {
-                    f = true;
-                    break;
-                }
+                f = true;
+                break;
             }
-            if (!f)
-                cnt++;
         }
-        cout << cnt - 1 << endl;
+        if (!f)
+            cnt++;
     }
+    for (int val : v)
+        if (val == x)
+            cnt++;
+    cout << cnt << endl;
     return 0;
 }
