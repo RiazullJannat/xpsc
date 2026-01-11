@@ -7,9 +7,8 @@ int main()
     cin.tie(NULL);
     int t;
     cin >> t;
-    deque<pair<int, pair<bool, int>>> v;
-    map<int, deque<pair<int, bool>>> mp;
-    priority_queue<int> as;
+    set<pair<int, int>> s;
+    multiset<pair<int, int>> ms;
     int i = 1;
     while (t--)
     {
@@ -19,26 +18,23 @@ int main()
         {
             int val;
             cin >> val;
-            v.push_back({val, {false, i}});
-            mp[val].push_back({i, false});
-            as.push(val);
+            s.insert({i, val});
+            ms.insert({val, -i});
             i++;
         }
         else if (n == 2)
         {
-            if (v[0].second.first == false)
-            {
-                cout << i + 1 << " ";
-                v.pop_front();
-                break;
-            }
+            int pos = s.begin()->first, val = s.begin()->second;
+            cout << pos << " ";
+            s.erase(s.begin());
+            ms.erase({val, -pos});
         }
-        else if (n == 3)
+        else
         {
-            int val = as.top();
-            auto r = mp[val][0];
-            cout << r.first << " ";
-            mp[val].pop_front();
+            int pos = -ms.rbegin()->second, val = ms.rbegin()->first;
+            cout << pos << " ";
+            s.erase({pos, val});
+            ms.erase(--ms.end());
         }
     }
     return 0;
