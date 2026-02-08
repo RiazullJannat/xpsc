@@ -9,22 +9,17 @@ int main()
     cin >> t;
     while (t--)
     {
-        int sum = 0, n;
+        int n;
         cin >> n;
+        vector<int> v(n);
         for (int i = 0; i < n; i++)
         {
-            int val;
-            cin >> val;
-            sum += val;
+            cin >> v[i];
         }
-        if (sum < 0)
-        {
-            int x = (-sum + n - 1) / n;
-            cout << x << "\n";
-        }
-        else
-            cout << 0 << "\n";
+        sort(v.begin(), v.end());
+        for (int val : v)
+            cout << val << " ";
+        cout << "\n";
     }
-
     return 0;
 }

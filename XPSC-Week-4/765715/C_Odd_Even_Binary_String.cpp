@@ -9,22 +9,20 @@ int main()
     cin >> t;
     while (t--)
     {
-        int sum = 0, n;
+        int n;
         cin >> n;
+        vector<int> v(n);
+        int cnt0 = 0;
         for (int i = 0; i < n; i++)
         {
-            int val;
-            cin >> val;
-            sum += val;
+            cin >> v[i];
+            if (v[i] == 0)
+                cnt0++;
         }
-        if (sum < 0)
-        {
-            int x = (-sum + n - 1) / n;
-            cout << x << "\n";
-        }
+        if (cnt0 % 2 == 0)
+            cout << "YES\n";
         else
-            cout << 0 << "\n";
+            cout << "NO\n";
     }
-
     return 0;
 }
