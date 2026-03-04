@@ -9,7 +9,12 @@ int main()
     cin >> T;
     while (T--)
     {
-        solve();
+        long long N;
+        cin >> N;
+        long long count = N / 2;
+        long long result = (count * (2 + N)) / 2;
+
+        cout << result << endl;
     }
     return 0;
 }

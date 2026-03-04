@@ -9,55 +9,39 @@ int main()
     cin >> T;
     while (T--)
     {
-        int N;
-        cin >> N;
-        vector<int> A(N);
-        for (int i = 0; i < N; i++)
-            cin >> A[i];
+        int n;
+        cin >> n;
+        vector<int> a(n);
+        for (int i = 0; i < n; i++)
+            cin >> a[i];
 
-        vector<int> balloons(N, 0);
-        vector<bool> in_party(N, true);
-        set<int> present_friends;
+        vector<int> res(n);
+        int current_balloons = 0;
+        set<int> in_party;
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
 
-        for (int i = 0; i < N; i++)
+        for (int i = 0; i < n; i++)
         {
-            present_friends.insert(i);
-        }
-
-        int current_balloons_spread = 0;
-
-        vector<int> total_hits_at_index(N, 0);
-
-        for (int i = 0; i < N; i++)
-        {
-            if (present_friends.find(i) == present_friends.end())
-                continue;
-
-            present_friends.erase(i); 
-
-            auto it = present_friends.begin();
-            vector<int> to_remove;
-
-            for (; it != present_friends.end(); ++it)
+            while (!pq.empty() && pq.top().first <= current_balloons)
             {
-                int friend_idx = *it;
-                balloons[friend_idx]++;
-                if (balloons[friend_idx] >= A[friend_idx])
-                {
-                    to_remove.push_back(friend_idx);
-                }
+                int idx = pq.top().second;
+                res[idx] = pq.top().first;
+                in_party.erase(idx);
+                pq.pop();
             }
-
-            for (int idx : to_remove)
+            if (a[i] <= current_balloons)
             {
-                present_friends.erase(idx);
+                res[i] = a[i];
+            }
+            else
+            {
+                res[i] = current_balloons;
+                current_balloons++;
             }
         }
 
-        for (int i = 0; i < N; i++)
-        {
-            cout << balloons[i] << (i == N - 1 ? "" : " ");
-        }
+        for (int i = 0; i < n; i++)
+            cout << res[i] << (i == n - 1 ? "" : " ");
         cout << endl;
     }
     return 0;
